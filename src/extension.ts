@@ -41,7 +41,7 @@ export function activate(context: vscode.ExtensionContext) {
   let editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor;
   let disposables: vscode.Disposable[] = [];
 
-  const hexColorsPattern = /(#[0-9A-Fa-f]{8}\b|#[0-9A-Fa-f]{6}\b|#[0-9A-Fa-f]{3}\b)/gim;
+  const hexColorsPattern = /(0x[0-9A-Fa-f]{6}\b)/gim;
   // You can view and debug this regex at https://www.debuggex.com/r/NXCGLPeNmZf8yl35
 
   const rgbxColorsPattern = /(rgba\((1?[0-9]{1,2}|2[0-4][0-9]|25[0-5]),(1?[0-9]{1,2}|2[0-4][0-9]|25[0-5]),(1?[0-9]{1,2}|2[0-4][0-9]|25[0-5]),(0?.?[0-9]+|1.0+|1)\)|rgb\((1?[0-9]{1,2}|2[0-4][0-9]|25[0-5]),(1?[0-9]{1,2}|2[0-4][0-9]|25[0-5]),(1?[0-9]{1,2}|2[0-4][0-9]|25[0-5])\))/gim;
@@ -133,8 +133,8 @@ function processMatches(
   while ((match = pattern.exec(text))) {
     const startPos = document.positionAt(match.index);
     const endPos = document.positionAt(match.index + match[0].length);
-
-    accumulator.push(decorationFactory(match[0], startPos, endPos));
+    vscode.window.showInformationMessage(match[0])
+    accumulator.push(decorationFactory(match[0].replace('0x', '#'), startPos, endPos));
     accumulator.slice(0, MAX_DECORATIONS_PER_TYPE);
   }
 }
