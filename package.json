@@ -2,7 +2,7 @@
   "name": "color-vision",
   "displayName": "Color Vision",
   "description": "Renders colors (hex, rgb) in their color.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "engines": {
     "vscode": "^1.38.0"
   },

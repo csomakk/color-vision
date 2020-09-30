@@ -133,7 +133,7 @@ function processMatches(
   while ((match = pattern.exec(text))) {
     const startPos = document.positionAt(match.index);
     const endPos = document.positionAt(match.index + match[0].length);
-    vscode.window.showInformationMessage(match[0])
+    //vscode.window.showInformationMessage(match[0])
     accumulator.push(decorationFactory(match[0].replace('0x', '#'), startPos, endPos));
     accumulator.slice(0, MAX_DECORATIONS_PER_TYPE);
   }
